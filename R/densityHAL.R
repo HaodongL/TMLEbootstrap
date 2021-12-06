@@ -24,11 +24,21 @@ densityHAL <- R6Class("densityHAL",
         weights = df_compressed$Freq,
         family = "binomial",
         lambda = lambda,
-        fit_type = "glmnet",
-        use_min = TRUE, # useless
+        # fit_type = "glmnet",
+        # use_min = TRUE, # useless
         return_lasso = TRUE,
         return_x_basis = FALSE,
-        cv_select = FALSE,
+        # cv_select = FALSE,
+        smoothness_orders = 0,
+        max_degree = 2,
+        fit_control = list(
+          cv_select = FALSE,
+          n_folds = 10,
+          foldid = NULL,
+          use_min = TRUE,
+          lambda.min.ratio = 1e-4,
+          prediction_bounds = "default"
+        ),
         yolo = FALSE,
         ...
       )
@@ -123,11 +133,21 @@ cvDensityHAL <- R6Class("cvDensityHAL",
           Y = df_compressed$Y,
           weights = df_compressed$Freq,
           family = "binomial",
-          fit_type = "glmnet",
-          use_min = TRUE,
+          # fit_type = "glmnet",
+          # use_min = TRUE,
           return_lasso = TRUE,
           return_x_basis = FALSE,
-          cv_select = TRUE,
+          # cv_select = TRUE,
+          smoothness_orders = 0,
+          max_degree = 2,
+          fit_control = list(
+            cv_select = FALSE,
+            n_folds = 10,
+            foldid = NULL,
+            use_min = TRUE,
+            lambda.min.ratio = 1e-4,
+            prediction_bounds = "default"
+          ),
           yolo = FALSE
         )
         lambda_grid <- hal_for_lambda$hal_lasso$lambda

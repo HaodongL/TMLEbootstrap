@@ -90,6 +90,15 @@ comprehensiveBootstrap <- R6Class("comprehensiveBootstrap",
     },
     compute_wald_width = function() {
       self$width_all <- list(wald = diff(self$bootOut$pointTMLE$CI))
+      # self$bootOut$bootstrap(2e2)
+      # all_ci <- self$bootOut$all_boot_CI()
+      # self$width_all <- list(wald = diff(all_ci$boot))
+    },
+    compute_boot_width = function() {
+      # self$width_all <- list(wald = diff(self$bootOut$pointTMLE$CI))
+      self$bootOut$bootstrap(1e2)
+      all_ci <- self$bootOut$all_boot_CI()
+      self$width_all <- list(wald = diff(all_ci$boot))
     }
   )
 )

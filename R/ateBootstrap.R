@@ -9,6 +9,8 @@ ateBootstrap <- R6Class("ateBootstrap",
     lambda1 = NULL,
     M1 = NULL,
     pointTMLE = NULL,
+    # Q_init = NULL,
+    # g_init = NULL,
 
     psi_bootstrap = NULL,
     targeting = NULL,
@@ -28,6 +30,9 @@ ateBootstrap <- R6Class("ateBootstrap",
       if (class(data$W) != "data.frame") message("W not data.frame")
       tmleOut <- ateTMLE$new(data = self$data)
       tmleOut$initial_fit(lambda1 = lambda1, lambda2 = lambda2, M1 = M1, M2 = M2, family_y = family_y)
+      # self$Q_init <- tmleOut$Q_fit
+      # self$g_init <- tmleOut$g_fit
+      
       if (self$targeting) {
         tmleOut$target()
       } else {

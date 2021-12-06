@@ -236,7 +236,7 @@ ateTuneHyperparam <- R6Class("AteTuneHyperparam",
           family_y = self$family_y,
           ...
         )
-        boot_here$compute_wald_width()
+        boot_here$compute_boot_width()
         return(boot_here)
       }
       # named list. the name is the lambda used for fitting

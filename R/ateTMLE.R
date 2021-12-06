@@ -59,13 +59,24 @@ ateTMLE <- R6::R6Class("ateTMLE",
         X = data.frame(self$data$A, self$data$W),
         Y = self$data$Y,
         family = family_y,
-        fit_type = "glmnet",
+        # fit_type = "glmnet",
         lambda = lambda1,
-        cv_select = cv_select_Q,
-        use_min = TRUE,
+        # cv_select = cv_select_Q,
+        # use_min = TRUE,
         return_lasso = TRUE,
         return_x_basis = TRUE,
         yolo = FALSE,
+        # 
+        smoothness_orders = 0,
+        max_degree = 2,
+        fit_control = list(
+          cv_select = cv_select_Q,
+          n_folds = 10,
+          foldid = NULL,
+          use_min = TRUE,
+          lambda.min.ratio = 1e-4,
+          prediction_bounds = "default"
+        ),
         ...
       )
       # WILSON hack the lambda_min_ratio
@@ -80,13 +91,24 @@ ateTMLE <- R6::R6Class("ateTMLE",
           X = data.frame(self$data$A, self$data$W),
           Y = self$data$Y,
           family = family_y,
-          fit_type = "glmnet",
+          # fit_type = "glmnet",
           lambda = lambda_grid_new,
-          cv_select = cv_select_Q,
-          use_min = TRUE,
+          # cv_select = cv_select_Q,
+          # use_min = TRUE,
           return_lasso = TRUE,
           return_x_basis = TRUE,
           yolo = FALSE,
+          # 
+          smoothness_orders = 0,
+          max_degree = 2,
+          fit_control = list(
+            cv_select = cv_select_Q,
+            n_folds = 10,
+            foldid = NULL,
+            use_min = TRUE,
+            lambda.min.ratio = 1e-4,
+            prediction_bounds = "default"
+          ),
           ...
         )
       }
@@ -95,13 +117,24 @@ ateTMLE <- R6::R6Class("ateTMLE",
       self$g_fit <- hal9001::fit_hal(
         X = data.frame(self$data$W),
         Y = self$data$A,
-        fit_type = "glmnet",
+        # fit_type = "glmnet",
         family = "binomial",
         lambda = lambda2,
-        cv_select = cv_select_g,
+        # cv_select = cv_select_g,
         return_lasso = TRUE,
         return_x_basis = TRUE,
-        yolo = FALSE
+        yolo = FALSE,
+        # 
+        smoothness_orders = 0,
+        max_degree = 2,
+        fit_control = list(
+          cv_select = cv_select_g,
+          n_folds = 10,
+          foldid = NULL,
+          use_min = TRUE,
+          lambda.min.ratio = 1e-4,
+          prediction_bounds = "default"
+        ),
       )
     },
     plot_Q1W = function(foo = NULL) {
